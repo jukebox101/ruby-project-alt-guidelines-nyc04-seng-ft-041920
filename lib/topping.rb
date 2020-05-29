@@ -1,5 +1,5 @@
 class Topping < ActiveRecord::Base
-    @@prompt = TTY::Prompt.new
+    @@prompt = TTY::Prompt.new(active_color: :magenta)
 
     def self.add_toppings(customer_name)
         answer = Dessert.select_dessert(customer_name)

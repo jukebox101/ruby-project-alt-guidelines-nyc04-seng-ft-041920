@@ -1,5 +1,5 @@
 class Interface
-    @@prompt = TTY::Prompt.new
+    @@prompt = TTY::Prompt.new(active_color: :magenta)
 
     def initialize
         Interface.intro
@@ -8,7 +8,7 @@ class Interface
 
     def self.intro
         Interface.intro_animation
-        puts "Welcome To Leo's Dessert Shop!!".colorize(:yellow).colorize( :background => :magenta)
+        puts "Welcome To Leo's Dessert Shop!!".colorize(:yellow)
         puts "
                                                 '##:::::::'########::'#######::'####::'######::                         
                                                 ##::::::: ##.....::'##.... ##: ####:'##... ##:                         
@@ -182,7 +182,7 @@ class Interface
 
 
 
-        
+
                                                                             (
                                                                             )
                                                                         __..---..__
