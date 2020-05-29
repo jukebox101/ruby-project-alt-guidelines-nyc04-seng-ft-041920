@@ -6,7 +6,7 @@ class Dessert < ActiveRecord::Base
 
 
     def self.dessert_selection(customer_name)
-        @@prompt.select("What type of dessert would you like?") do |menu|
+        @@prompt.select("What type of dessert would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Cake", -> {self.cakes(customer_name)}
             menu.choice "Pie", -> {self.pies(customer_name)}
             menu.choice "Cookies", -> {self.cookies(customer_name)}
@@ -19,7 +19,7 @@ class Dessert < ActiveRecord::Base
 
     def self.cakes(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of cake would you like?") do |menu|
+        @@prompt.select("What kind of cake would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Triple Chocolate", -> {
                 new_dessert = Dessert.create(dessert_type: "Cake", flavor: "Triple Chocolate")}
             menu.choice "Tres Leches", -> {
@@ -43,7 +43,7 @@ class Dessert < ActiveRecord::Base
 
     def self.pies(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of pie would you like?") do |menu|
+        @@prompt.select("What kind of pie would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Local Apple", -> {
                 new_dessert = Dessert.create(dessert_type: "Pie", flavor: "Local Apple")}
             menu.choice "Banana Cream", -> {
@@ -68,12 +68,12 @@ class Dessert < ActiveRecord::Base
 
     def self.cookies(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of cookie would you like?") do |menu|
+        @@prompt.select("What kind of cookie would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Chunky Chocolate Chip", -> {
                 new_dessert = Dessert.create(dessert_type: "Cookie", flavor: "Chunky Chocolate Chip")}
             menu.choice "Oatmeal Raisin", -> {
                 new_dessert = Dessert.create(dessert_type: "Cookie", flavor: "Oatmeal Raisin")}
-            menu.choice "Snickerdoodles", -> {
+            menu.choice "Snickerdoodle", -> {
                 new_dessert = Dessert.create(dessert_type: "Cookie", flavor: "Snickerdoodles")}
             menu.choice "White Chocolate Macadamia Nut", -> {
                 new_dessert = Dessert.create(dessert_type: "Cookie", flavor: "White Chocolate Macadamia Nut")}
@@ -92,7 +92,7 @@ class Dessert < ActiveRecord::Base
 
     def self.pastries(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of pastries would you like?") do |menu|
+        @@prompt.select("What kind of pastries would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Apple Turnover", -> {
                 new_dessert = Dessert.create(dessert_type: "Pastry", flavor: "Apple Turnover")}
             menu.choice "Baklava", -> {
@@ -116,7 +116,7 @@ class Dessert < ActiveRecord::Base
 
     def self.macarons(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of macaron would you like?") do |menu|
+        @@prompt.select("What kind of macaron would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Almond Raspberry", -> {
                 new_dessert = Dessert.create(dessert_type: "Macaron", flavor: "Almond Raspberry")}
             menu.choice "Blueberry Lavender", -> {
@@ -144,7 +144,7 @@ class Dessert < ActiveRecord::Base
 
     def self.ice_cream(customer_name)
         new_dessert = nil
-        @@prompt.select("What kind of ice cream would you like?") do |menu|
+        @@prompt.select("What kind of ice cream would you like?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice "Vanilla Bean", -> {
                 new_dessert = Dessert.create(dessert_type: "Ice Cream", flavor: "Vanilla Bean")}
             menu.choice "Neapolitan", -> {
@@ -172,7 +172,7 @@ class Dessert < ActiveRecord::Base
         array = Customer.desserts(customer_name)
         dessert_names = array.map {|dessert| "Order ##{dessert.id}: #{dessert.flavor} #{dessert.dessert_type} #{Topping.find_toppings(dessert.toppings)}"}
         puts dessert_names
-        answer = @@prompt.ask("Which dessert would you like to customize? Type in the order number:") do |q|
+        answer = @@prompt.ask("Which dessert would you like to customize? Type in the order number:".colorize(:yellow).colorize( :background => :magenta)) do |q|
             q.required true
         end
         answer
@@ -183,7 +183,7 @@ class Dessert < ActiveRecord::Base
         dessert_names = array.map {|dessert| "Order ##{dessert.id}: #{dessert.flavor} #{dessert.dessert_type} #{Topping.find_toppings(dessert.toppings)}"}
         puts dessert_names
         
-        dess_id = @@prompt.ask("Which item would you like to delete? Type in the order number:") do |q|
+        dess_id = @@prompt.ask("Which item would you like to delete? Type in the order number:".colorize(:yellow).colorize( :background => :magenta)) do |q|
             q.required true
         end
             
@@ -193,7 +193,7 @@ class Dessert < ActiveRecord::Base
             order_id = Order.all.select {|order| order.id if order.dessert_id == dess_id}                
             top_id = Topping.all.select {|topping| topping.id if topping.dessert_id_top == dess_id}
             
-            answer = @@prompt.select("Are you sure you want to delete Order ##{dess_id}?") do |menu|
+            answer = @@prompt.select("Are you sure you want to delete Order ##{dess_id}?".colorize(:yellow)) do |menu|
                 menu.choice "Yes, I'm sure", 1
                 menu.choice "Nope, I changed my mind", 2
               end
@@ -209,7 +209,7 @@ class Dessert < ActiveRecord::Base
             end
 
         else 
-            puts "Sorry, that's not a valid order number. Try again!"
+            puts "Sorry, that's not a valid order number. Try again!".colorize(:red)
             self.delete_an_item(customer_name)
         end
             Customer.choose_action(customer_name)

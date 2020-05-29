@@ -3,7 +3,9 @@ class Topping < ActiveRecord::Base
 
     def self.add_toppings(customer_name)
         answer = Dessert.select_dessert(customer_name)
-        toppings = @@prompt.multi_select("Choose your toppings:", max: 3, echo: true) do |menu|
+        answer = answer.to_i
+        if Dessert.all.find {|dessert| dessert.id == answer}
+        toppings = @@prompt.multi_select("Choose your toppings:".colorize(:yellow).colorize( :background => :magenta), max: 3, echo: true) do |menu|
             menu.choice "Hot Fudge Chocolate Sauce"
             menu.choice "Mixed Berry Compote"
             menu.choice "Sea Salt Caramel Sauce"
@@ -28,6 +30,10 @@ class Topping < ActiveRecord::Base
             end
             }   
         Customer.choose_action(customer_name)
+        else
+            puts "Sorry, that's not a valid order number. Try again!".colorize(:red)
+            Topping.add_toppings(customer_name)
+        end
     end
 
     def self.find_toppings(topping_id)

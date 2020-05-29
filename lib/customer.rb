@@ -5,7 +5,7 @@ class Customer < ActiveRecord::Base
     @@prompt = TTY::Prompt.new
 
     def self.choose_action(customer_name)
-        answer = @@prompt.select("What you would like to do:") do |menu|
+        answer = @@prompt.select("What you would like to do:".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice 'View Dessert Menu', -> {Interface.dessert_menu(customer_name)}
             menu.choice 'Order Dessert', -> {Dessert.dessert_selection(customer_name)}
             menu.choice 'View Your Order', -> {Order.print_with_customer_name(customer_name)}

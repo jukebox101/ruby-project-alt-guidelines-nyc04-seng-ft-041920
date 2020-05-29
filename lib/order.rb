@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
                 puts "#{array.flavor} #{array.dessert_type} #{toppings}"
             end}
         else
-            puts "You haven't order anything yet"
+            puts "You haven't order anything yet".colorize(:red)
         end
         Customer.choose_action(customer_name)
     end
