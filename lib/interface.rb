@@ -80,6 +80,7 @@ class Interface
         @@prompt.select("Are you logging in, or creating a new account?".colorize(:yellow).colorize( :background => :magenta)) do |menu|
             menu.choice 'Login', -> { self.login }
             menu.choice 'Create A New Account', -> { self.create_new_account }
+            menu.choice 'Exit', -> { Interface.outro }
         end
     end
 
