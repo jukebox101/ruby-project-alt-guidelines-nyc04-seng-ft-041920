@@ -1,6 +1,6 @@
 Leo's Dessert Shop 🍰
 ========================
-![app pic](images/Screen%20Shot%202020-07-01%20at%202.08.07%20PM.png)
+![app pic](images/Mod1_app_pic.png)
 
 Leo's Dessert Shop is a Ruby CLI Application that simulates the ordering process of your typical pastry shop.
 User's can brows through, and order from a selection of delicious dessert. The user can even customize
